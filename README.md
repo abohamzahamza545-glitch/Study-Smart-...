@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudySmart - عالم المغامرات الذكية</title>
+    <title>StudySmart - منصة التعلم الذكي</title>
     <style>
         :root {
             --neon-pink: #ff007f;
@@ -77,12 +77,12 @@
         }
 
         .user-profile-circle {
-            width: 110px;
-            height: 110px;
+            width: 125px;
+            height: 125px;
             border-radius: 50%;
-            border: 5px solid var(--neon-cyan);
-            box-shadow: 0 0 30px var(--neon-cyan);
-            margin: 10px auto;
+            border: 4px solid var(--neon-cyan);
+            box-shadow: 0 0 35px var(--neon-cyan);
+            margin: 15px auto;
             overflow: hidden;
             background: #fff;
         }
