@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudySmart - منصة البكالوريا والنظام المصري المطور</title>
+    <title>StudySmart - منصة التعلم الذكي المطور</title>
     <style>
         :root {
             --neon-pink: #ff007f;
@@ -64,8 +64,8 @@
         }
 
         .hero-avatar {
-            width: 160px;
-            height: 160px;
+            width: 150px;
+            height: 150px;
             margin: 0 auto;
             border-radius: 50%;
             border: 5px solid var(--neon-yellow);
@@ -77,6 +77,22 @@
         @keyframes pulseGlow {
             from { box-shadow: 0 0 20px var(--neon-yellow); }
             to { box-shadow: 0 0 40px var(--neon-pink); }
+        }
+
+        .user-profile-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid var(--neon-cyan);
+            box-shadow: 0 0 20px var(--neon-cyan);
+            margin: 10px auto;
+            overflow: hidden;
+        }
+
+        .user-profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .input-wrapper { margin: 15px 0; }
@@ -142,7 +158,7 @@
             box-shadow: 0 0 30px var(--neon-green);
         }
 
-        .nav-tile .icon { font-size: 4rem; display: block; margin-bottom: 10px; }
+        .nav-tile .icon { font-size: 3.5rem; display: block; margin-bottom: 10px; }
 
         .resource-link {
             background: var(--neon-cyan);
@@ -242,6 +258,9 @@
 
     <!-- 2. لوحة التحكم الرئيسية -->
     <div id="screen-dashboard" class="screen">
+        <div class="user-profile-circle">
+            <img src="1000467716.png" alt="صورة الطالبة">
+        </div>
         <h2>أهلاً بك يا <span id="dash-user" style="color:var(--neon-cyan);"></span>! 🎓</h2>
         <div style="text-align: center;"><span class="status-badge">النظام المصري المطور 2026 ✅</span></div>
         <h4 style="color: var(--neon-yellow); margin-top: 5px;" id="dash-level-info"></h4>
@@ -450,7 +469,7 @@
             classwork: ["إجراء تجربة معملية افتراضية", "مناقشة وتحليل وثائق تاريخية أو جغرافية", "جلسة عصف ذهني لحل مشكلات برمجية"],
             models: [
                 [
-                    { Q: "في النظام المصري المطور للصف الثاني الثانوي، ما هو المبدأ الأساسي لتعدد المسارات؟", opts: ["التخصص المبكر وتنمية المهارات النوعية", "إلغاء المواد الأساسية", "صعوبة الامتحانات"], ans: 0 },
+                    { Q: "ใน النظام المصري المطور للصف الثاني الثانوي، ما هو المبدأ الأساسي لتعدد المسارات؟", opts: ["التخصص المبكر وتنمية المهارات النوعية", "إلغاء المواد الأساسية", "صعوبة الامتحانات"], ans: 0 },
                     { Q: "أي من المسارات التالية يركز بشكل أساسي على دراسة النظم الذكية والبرمجة؟", opts: ["الشعبة الأدبية", "شعبة علمي علوم", "الشعبة التكنولوجية"], ans: 2 },
                     { Q: "في علم الأحياء، ما هي العملية المسؤولة عن انقسام الخلايا الجسدية؟", opts: ["الانقسام الميوزي", "الانقسام الميتوزي", "التبرعم"], ans: 1 },
                     { Q: "في الرياضيات التطبيقية، محصلة قوتين متلاقيتين في نقطة تعتمد على:", opts: ["الزاوية بينهما فقط", "مقدار القوتين فقط", "مقدار القوتين والزاوية بينهما"], ans: 2 },
@@ -464,7 +483,7 @@
                     { Q: "في البرمجة، أي مما يلي يعتبر حلقة تكرار (Loop) أساسية؟", opts: ["If Statement", "For Loop", "Variable Declaration"], ans: 1 }
                 ],
                 [
-                    { Q: "ما الهدف الاستراتيجي من استحداث الشعبة التكنولوجية في نظام التعليم المصري؟", opts: ["إعداد كوادر قادرة على قيادة التحول الرقمي", "تقليل عدد الطلاب في المدارس"، "صعوبة المناهج"], ans: 0 },
+                    { Q: "ما الهدف الاستراتيجي من استحداث الشعبة التكنولوجية في نظام التعليم المصري؟", opts: ["إعداد كوادر قادرة على قيادة التحول الرقمي", "تقليل عدد الطلاب في المدارس*", "صعوبة المناهج"], ans: 0 },
                     { Q: "في الجغرافيا، دراسة توزيع السكان وعلاقتهم بالموارد تندرج تحت:", opts: ["الجغرافيا الطبيعية", "جغرافيا السكان والتنمية", "الجغرافيا الفلكية"], ans: 1 },
                     { Q: "في الاقتصاد، التضخم يعرف بأنه:", opts: ["انخفاض مستمر في الأسعار", "ارتفاع مستمر في المستوى العام للأسعار", "زيادة قيمة العملة"], ans: 1 },
                     { Q: "في الذكاء الاصطناعي، الشبكات العصبية الاصطناعية مصممة لمحاكاة:", opts: ["الدوائر الكهربائية التناظرية", "طريقة عمل الدماغ البشري", "أنظمة التبريد الميكانيكية"], ans: 1 },
@@ -622,7 +641,6 @@
 
     function startFinalMonthlyExam() {
         activeCategoryType = 'monthly';
-        // دمج النماذج لإنشاء اختبار شامل
         const allModels = educationalDatabase[currentUserData.grade].models;
         currentQuizModel = [
             allModels[0][0], allModels[0][1],
