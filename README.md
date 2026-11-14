@@ -3,111 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudySmart - عالم التعلم الممتع</title>
+    <title>StudySmart - عالم التعلم الذكي</title>
     <style>
         :root {
             --neon-pink: #ff007f;
             --neon-yellow: #ffeb3b;
-            --neon-cyan: #00e5ff;
-            --neon-purple: #7c4dff;
-            --neon-green: #76ff03;
-            --bg-dark: #1a0033;
+            --neon-cyan: #00ffff;
+            --neon-purple: #9c27b0;
+            --neon-green: #00e676;
+            --bg-grad: linear-gradient(135deg, #1a0033, #4a0033);
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: radial-gradient(circle, #311b92, #000000);
-            color: #fff;
+            font-family: 'Cairo', sans-serif, Tahoma;
+            background: var(--bg-grad);
+            color: #ffffff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        #game-container {
+        #app-window {
             width: 100%;
-            max-width: 480px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 4px solid var(--neon-pink);
-            border-radius: 30px;
-            box-shadow: 0 0 30px var(--neon-pink), inset 0 0 20px var(--neon-cyan);
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 4px solid var(--neon-cyan);
+            border-radius: 35px;
+            box-shadow: 0 0 40px var(--neon-cyan), inset 0 0 20px var(--neon-pink);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            min-height: 90vh;
+            min-height: 92vh;
+            position: relative;
         }
 
-        .screen {
+        .view {
             display: none;
-            padding: 25px;
+            padding: 30px;
             flex-direction: column;
-            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeIn 0.4s ease-in-out;
+            flex: 1;
         }
 
-        .screen.active {
-            display: flex;
-        }
+        .view.active { display: flex; }
 
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         h1, h2, h3 {
             text-align: center;
-            text-shadow: 0 0 10px var(--neon-yellow);
             color: var(--neon-yellow);
-            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--neon-pink);
+            margin: 10px 0;
         }
 
-        .glow-input {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid var(--neon-cyan);
-            padding: 15px;
+        .hero-img {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto;
+            border-radius: 50%;
+            border: 4px solid var(--neon-yellow);
+            box-shadow: 0 0 25px var(--neon-yellow);
+            object-fit: cover;
+        }
+
+        .input-group {
+            margin: 15px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--neon-cyan);
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--neon-pink);
             border-radius: 15px;
             color: white;
             font-size: 1.1rem;
-            margin-bottom: 15px;
+            box-sizing: border-box;
             outline: none;
-            box-shadow: inset 0 0 10px rgba(0,229,255,0.5);
+            box-shadow: inset 0 0 10px rgba(255,0,127,0.3);
         }
 
-        .glow-input::placeholder { color: #e0e0e0; }
-
-        .btn-game {
+        .glow-btn {
             background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
             border: none;
-            padding: 15px;
+            padding: 18px;
             border-radius: 50px;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 0 20px var(--neon-pink);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, background 0.2s;
             text-align: center;
-            text-decoration: none;
             display: block;
-            margin-top: 10px;
+            width: 100%;
+            margin-top: 20px;
+            text-decoration: none;
         }
 
-        .btn-game:hover {
+        .glow-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px var(--neon-yellow);
+            box-shadow: 0 0 35px var(--neon-yellow);
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
         }
 
-        .grid-games {
+        .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
+            margin-top: 20px;
         }
 
-        .game-card {
-            background: rgba(0, 0, 0, 0.6);
-            border: 3px solid var(--neon-green);
+        .nav-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--neon-green);
             border-radius: 20px;
             padding: 20px;
             text-align: center;
@@ -116,216 +139,199 @@
             transition: all 0.3s;
         }
 
-        .game-card:hover {
+        .nav-card:hover {
             background: var(--neon-green);
             color: black;
             transform: translateY(-5px);
         }
 
-        .game-card .icon {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 10px;
-        }
+        .nav-card .icon { font-size: 3rem; display: block; margin-bottom: 8px; }
 
-        .hidden { display: none !important; }
-
-        .book-link {
-            display: block;
+        .book-item {
             background: var(--neon-cyan);
             color: black;
             padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 10px;
+            border-radius: 12px;
+            margin-bottom: 12px;
             font-weight: bold;
             text-decoration: none;
+            display: block;
             text-align: center;
-            box-shadow: 0 0 10px var(--neon-cyan);
+            box-shadow: 0 0 15px var(--neon-cyan);
         }
 
         .quiz-option {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 15px;
             margin-bottom: 10px;
-            border: 1px solid white;
+            border: 2px solid white;
             cursor: pointer;
+            transition: 0.2s;
         }
 
         .quiz-option.selected {
             background: var(--neon-yellow);
             color: black;
+            border-color: var(--neon-yellow);
             font-weight: bold;
         }
 
-        #avatar-display {
-            font-size: 5rem;
+        .cert-frame {
+            border: 8px double var(--neon-yellow);
+            padding: 25px;
             text-align: center;
-            margin: 10px 0;
-            filter: drop-shadow(0 0 15px var(--neon-yellow));
+            background: radial-gradient(circle, #4a0033, #1a0033);
+            border-radius: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 30px var(--neon-yellow);
         }
     </style>
 </head>
 <body>
 
-<div id="game-container">
+<div id="app-window">
     
-    <!-- شاشة تسجيل البيانات -->
-    <div id="screen-login" class="screen active">
-        <h1>🌟 StudySmart 🌟</h1>
-        <div id="avatar-display">🎮</div>
-        <input type="text" id="player-name" class="glow-input" placeholder="أدخل اسم البطل...">
+    <!-- 1. شاشة تسجيل البيانات -->
+    <div id="view-login" class="view active">
+        <h1 style="color:var(--neon-pink);">🌟 StudySmart 🌟</h1>
+        <!-- صورة الشخصية -->
+        <img src="1000467716.png" class="hero-img" alt="البطلة">
         
-        <select id="grade-select" class="glow-input" onchange="updateTracks()">
-            <option value="1" style="background:#330033;">الصف الأول الثانوي</option>
-            <option value="2" style="background:#330033;">الصف الثاني الثانوي</option>
-            <option value="3" style="background:#330033;">الصف الثالث الثانوي</option>
-        </select>
+        <div class="input-group">
+            <label>اسم البطل/البطلة:</label>
+            <input type="text" id="input-name" placeholder="مثال: نيرة أحمد">
+        </div>
 
-        <select id="track-select" class="glow-input hidden"></select>
-        
-        <input type="tel" id="parent-phone" class="glow-input" placeholder="رقم واتساب ولي الأمر...">
-        
-        <button class="btn-game" onclick="startGame()">دخول عالم المغامرة 🚀</button>
+        <div class="input-group">
+            <label>المرحلة الدراسية:</label>
+            <select id="input-grade">
+                <option value="الأول الثانوي" selected>الصف الأول الثانوي</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>رقم واتساب ولي الأمر (للتقارير):</label>
+            <input type="tel" id="input-phone" placeholder="01xxxxxxxxx">
+        </div>
+
+        <button class="glow-btn" onclick="handleLogin()">دخول عالم المغامرات 🚀</button>
     </div>
 
-    <!-- الشاشة الرئيسية للألعاب والميزات -->
-    <div id="screen-hub" class="screen">
-        <h2>مرحباً بك يا <span id="display-name" style="color: var(--neon-cyan);"></span>!</h2>
-        <div class="grid-games">
-            <div class="game-card" onclick="switchScreen('screen-hub', 'screen-library')">
+    <!-- 2. الشاشة الرئيسية (الواجهة التفاعلية) -->
+    <div id="view-dashboard" class="view">
+        <h2>أهلاً بك يا <span id="user-display" style="color:var(--neon-cyan);"></span>! 🎓</h2>
+        <p style="text-align: center; color: var(--neon-yellow);">اختر المهمة التالية:</p>
+        
+        <div class="dashboard-grid">
+            <div class="nav-card" onclick="switchView('view-dashboard', 'view-library')">
                 <span class="icon">📚</span>
                 <h4>المكتبة السحرية</h4>
             </div>
-            <div class="game-card" onclick="switchScreen('screen-hub', 'screen-quiz')">
-                <span class="icon">⚡</span>
-                <h4>تحدي المعرفة</h4>
+            <div class="nav-card" onclick="switchView('view-dashboard', 'view-quiz')">
+                <span class="icon">📝</span>
+                <h4>التقييمات الوزارية</h4>
             </div>
-            <div class="game-card" onclick="startAICoach()">
+            <div class="nav-card" onclick="activateAiCoach()">
                 <span class="icon">🤖</span>
-                <h4>المعلم الخارق</h4>
+                <h4>المعلم الذكي</h4>
             </div>
-            <div class="game-card" onclick="triggerParentReward()">
+            <div class="nav-card" onclick="switchView('view-dashboard', 'view-certificate')">
                 <span class="icon">🏆</span>
-                <h4>إنجازات الشهر</h4>
+                <h4>شهادة الإنجاز</h4>
             </div>
         </div>
     </div>
 
-    <!-- مكتبة الكتب -->
-    <div id="screen-library" class="screen">
-        <button class="btn-game" style="margin-bottom: 20px;" onclick="switchScreen('screen-library', 'screen-hub')">⬅️ العودة</button>
-        <h3>📚 الكتب المعتمدة</h3>
-        <div id="books-list"></div>
+    <!-- 3. مكتبة الكتب الوزارية -->
+    <div id="view-library" class="view">
+        <button class="glow-btn" style="width: auto; margin-bottom: 20px; padding: 10px;" onclick="switchView('view-library', 'view-dashboard')">⬅️ العودة للرئيسية</button>
+        <h3>📖 كتب وزارة التربية والتعليم</h3>
+        <p style="text-align:center; font-size: 0.9rem;">خاص بصف أولى ثانوي - اضغط للفتح:</p>
+        <div id="books-container">
+            <a href="https://moe.gov.eg" target="_blank" class="book-item">📘 كتاب العلوم المتكاملة (وزارة التعليم)</a>
+            <a href="https://moe.gov.eg" target="_blank" class="book-item">📙 كتاب الفلسفة والمنطق</a>
+            <a href="https://moe.gov.eg" target="_blank" class="book-item">📗 كتاب اللغة العربية</a>
+        </div>
     </div>
 
-    <!-- شاشة التقييم -->
-    <div id="screen-quiz" class="screen">
-        <button class="btn-game" style="margin-bottom: 20px;" onclick="switchScreen('screen-quiz', 'screen-hub')">⬅️ العودة</button>
-        <h3>⚡ تحدي الأسئلة السريع</h3>
-        <p id="question-text">ما هي عاصمة مصر؟</p>
-        <div class="quiz-option" onclick="selectOption(this)">القاهرة</div>
-        <div class="quiz-option" onclick="selectOption(this)">الإسكندرية</div>
-        <button class="btn-game" onclick="submitQuiz()">إرسال الإجابة 🚀</button>
+    <!-- 4. التقييمات الوزارية وتنبيه واتساب -->
+    <div id="view-quiz" class="view">
+        <button class="glow-btn" style="width: auto; margin-bottom: 15px; padding: 10px;" onclick="switchView('view-quiz', 'view-dashboard')">⬅️ العودة</button>
+        <h3>⚡ التقييم الوزاري المعتمد</h3>
+        <p>سؤال: ما هو الهدف الأساسي من منهج العلوم المتكاملة؟</p>
+        <div class="quiz-option" onclick="selectQuizOption(this)">دراسة كل مادة علمية منفصلة تماماً</div>
+        <div class="quiz-option" onclick="selectQuizOption(this)">ربط الظواهر الطبيعية بمفاهيم الفيزياء والكيمياء والأحياء</div>
+        <button class="glow-btn" onclick="submitQuizData()">إرسال الإجابة وتنبيه ولي الأمر</button>
+    </div>
+
+    <!-- 5. شهادة التقدير التلقائية -->
+    <div id="view-certificate" class="view">
+        <button class="glow-btn" style="width: auto; margin-bottom: 15px; padding: 10px;" onclick="switchView('view-certificate', 'view-dashboard')">⬅️ العودة</button>
+        <div class="cert-frame">
+            <h2 style="color: var(--neon-yellow);">شهادة تقدير وتفوق 🌟</h2>
+            <p>تمنح منصة StudySmart هذه الشهادة للبطلة:</p>
+            <h1 id="cert-name-display" style="color: var(--neon-cyan); margin: 10px 0;"></h1>
+            <p>لاجتيازها تقييمات الصف الأول الثانوي بامتياز وتفوق.</p>
+            <p style="font-size: 0.8rem; color: #aaa; margin-top: 30px;">معتمدة من نظام التعلم الذكي</p>
+        </div>
+        <button class="glow-btn" style="background: #25d366;" onclick="simulateWhatsAppCert()">إرسال الشهادة لواتساب ولي الأمر 💬</button>
     </div>
 
 </div>
 
 <script>
-    const curricula = {
-        "1": {
-            tracks: ["المسار العام"],
-            books: {
-                "المسار العام": [
-                    { name: "كتاب العلوم المتكاملة", link: "https://moe.gov.eg" },
-                    { name: "كتاب الفلسفة والمنطق", link: "https://moe.gov.eg" }
-                ]
-            }
-        },
-        "2": {
-            tracks: ["المسار العلمي", "المسار الأدبي"],
-            books: {
-                "المسار العلمي": [{ name: "كتاب الفيزياء والكيمياء", link: "https://moe.gov.eg" }],
-                "الم1" }],
-                "المسار الأدبي": [{ name: "كتاب التاريخ وعلم النفس", link: "https://moe.gov.eg" }]
-            }
-        },
-        "3": {
-            tracks: ["الشعبة العلمية", "الشعبة الأدبية"],
-            books: {
-                "الشعبة العلمية": [{ name: "كتاب الأحياء والجيولوجيا", link: "https://moe.gov.eg" }],
-                "الشعبة الأدبية": [{ name: "كتاب الجغرافيا والفلسفة", link: "https://moe.gov.eg" }]
-            }
-        }
-    };
+    function switchView(fromId, toId) {
+        document.getElementById(fromId).classList.remove('active');
+        document.getElementById(toId).classList.add('active');
+    }
 
-    function updateTracks() {
-        const grade = document.getElementById("grade-select").value;
-        const trackSelect = document.getElementById("track-select");
-        trackSelect.innerHTML = "";
+    function handleLogin() {
+        const name = document.getElementById('input-name').value;
+        const phone = document.getElementById('input-phone').value;
         
-        if (curricula[grade].tracks.length > 1) {
-            trackSelect.classList.remove("hidden");
-            curricula[grade].tracks.forEach(t => {
-                let opt = document.createElement("option");
-                opt.value = t;
-                opt.innerHTML = t;
-                trackSelect.appendChild(opt);
-            });
-        } else {
-            trackSelect.classList.add("hidden");
+        if(!name || !phone) {
+            alert("⚠️ يرجى إدخال الاسم ورقم هاتف ولي الأمر للمتابعة!");
+            return;
         }
+
+        document.getElementById('user-display').innerText = name;
+        document.getElementById('cert-name-display').innerText = name;
+        
+        switchView('view-login', 'view-dashboard');
     }
 
-    function switchScreen(fromId, toId) {
-        document.getElementById(fromId).classList.remove("active");
-        document.getElementById(toId).classList.add("active");
-    }
-
-    function startGame() {
-        const name = document.getElementById("player-name").value;
-        if(!name) { alert("أدخل اسمك أولاً!"); return; }
-        document.getElementById("display-name").innerHTML = name;
-        renderLibrary();
-        switchScreen("screen-login", "screen-hub");
-    }
-
-    function renderLibrary() {
-        const grade = document.getElementById("grade-select").value;
-        const trackSelect = document.getElementById("track-select");
-        const track = trackSelect.classList.contains("hidden") ? curricula[grade].tracks[0] : trackSelect.value;
-        const container = document.getElementById("books-list");
-        container.innerHTML = "";
-
-        curricula[grade].books[track].forEach(b => {
-            container.innerHTML += `<a href="${b.link}" target="_blank" class="book-link">📖 ${b.name}</a>`;
-        });
-    }
-
-    function startAICoach() {
+    function activateAiCoach() {
+        alert("🤖 المعلم الذكي: أهلاً بكِ! أنا هنا للإجابة على أسئلتكِ صوتياً ومساعدتكِ في المذاكرة.");
         if ('speechSynthesis' in window) {
-            const utterance = new SpeechSynthesisUtterance("مرحباً بك يا بطل! أنا معلمك الذكي، جاهز للإجابة على كل أسئلتك.");
+            const utterance = new SpeechSynthesisUtterance("أهلاً بك يا بطلة في منصة ستادي سمارت. أنا معلمك الذكي، جاهز لمساعدتك في التفوق.");
             utterance.lang = 'ar-SA';
             window.speechSynthesis.speak(utterance);
         }
-        alert("🤖 المعلم الذكي: تم تفعيل المساعد الصوتي!");
     }
 
-    function selectOption(el) {
-        document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
-        el.classList.add('selected');
+    function selectQuizOption(element) {
+        document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+        element.classList.add('selected');
     }
 
-    function submitQuiz() {
-        alert("🎉 إجابة صحيحة! تم تسجيل النتيجة وإرسال التقرير لواتساب ولي الأمر.");
-        switchScreen('screen-quiz', 'screen-hub');
+    function submitQuizData() {
+        const selected = document.querySelector('.quiz-option.selected');
+        const phone = document.getElementById('input-phone').value;
+        
+        if(!selected) {
+            alert("يرجى اختيار إجابة أولاً!");
+            return;
+        }
+
+        alert("🎉 إجابة صحيحة وممتازة! تم تسجيل الدرجة وإرسال تقرير فوري إلى رقم واتساب ولي الأمر: " + phone);
+        switchView('view-quiz', 'view-certificate');
     }
 
-    function triggerParentReward() {
-        alert("🏆 شهادة التقدير: تم حفظ إنجازاتك وإرسالها لولي الأمر بنجاح!");
+    function simulateWhatsAppCert() {
+        const phone = document.getElementById('input-phone').value;
+        alert("💬 تم إرسال صورة شهادة التقدير بنجاح إلى رقم الواتساب: " + phone + " ليفخر بكِ والداكِ!");
     }
-
-    updateTracks();
 </script>
 </body>
 </html>
